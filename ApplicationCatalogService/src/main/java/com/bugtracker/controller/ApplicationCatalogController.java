@@ -7,8 +7,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.BasePathAwareController;
 import org.springframework.hateoas.Resource;
@@ -28,7 +27,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @BasePathAwareController
 public class ApplicationCatalogController {
     private final ApplicationRepository applicationRepository;
-    private Logger log = LogManager.getLogger();
+    private Logger log = Logger.getLogger(ApplicationCatalogController.class);
 
     @Autowired
     public ApplicationCatalogController(final ApplicationRepository applicationRepository) {
@@ -53,8 +52,8 @@ public class ApplicationCatalogController {
     @RequestMapping(path = "applications/{id}", method = RequestMethod.GET, produces = "application/hal+json")
     public @ResponseBody
     ResponseEntity<?> getApplication(@PathVariable Integer id) {
-        Optional<Application> application = applicationRepository.findById(id);
-        getPersonInfo(application.get());
+        Application application = applicationRepository.findOne(id);
+        getPersonInfo(application);
 
         Resource resource = new Resource(application);
         resource.add(linkTo(methodOn(ApplicationCatalogController.class).getApplication(id)).withSelfRel());
