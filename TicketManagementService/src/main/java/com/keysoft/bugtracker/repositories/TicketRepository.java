@@ -9,7 +9,7 @@ import org.springframework.data.rest.core.annotation.RestResource;
 
 import com.keysoft.bugtracker.domain.Ticket;
 
-@RepositoryRestResource(path = "bug")
+@RepositoryRestResource(path = "tickets")
 public interface TicketRepository extends JpaRepository<Ticket, Integer> {
 	@RestResource(path = "descriptionIgnoreCaseContaining", rel = "descriptionIgnoreCaseContaining")
 	public List<Ticket> findByDescriptionIgnoreCaseContaining(@Param("description") String description);
