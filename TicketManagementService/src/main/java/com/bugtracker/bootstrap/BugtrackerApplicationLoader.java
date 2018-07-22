@@ -12,7 +12,6 @@ import com.bugtracker.repositories.TicketRepository;
 @Component
 public class BugtrackerApplicationLoader implements ApplicationListener<ContextRefreshedEvent> {
 
-	private static final Logger LOGGER = Logger.getLogger(BugtrackerApplicationLoader.class);
 	private TicketRepository ticketRepository;
 
 	@Autowired
